@@ -1,0 +1,836 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RemoteHub · Online Jobs</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #0b1b2b;
+      line-height: 1.5;
+    }
+
+    /* realistic container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header / nav */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+    }
+
+    .logo i {
+      color: #2f6bff;
+      font-size: 1.8rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-weight: 500;
+      color: #334155;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #2f6bff;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1e293b;
+      cursor: default;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: #2f6bff;
+      color: #2f6bff;
+    }
+
+    .btn-primary {
+      background: #2f6bff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: white;
+      cursor: default;
+      box-shadow: 0 6px 14px rgba(47, 107, 255, 0.25);
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #1e4fd9;
+    }
+
+    /* hero section */
+    .hero {
+      padding: 56px 0 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: #0a1628;
+      margin-bottom: 20px;
+    }
+
+    .hero-highlight {
+      color: #2f6bff;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #475569;
+      max-width: 520px;
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .search-bar {
+      display: flex;
+      background: white;
+      border-radius: 60px;
+      padding: 6px 6px 6px 22px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e9eef4;
+      max-width: 540px;
+      margin-bottom: 28px;
+    }
+
+    .search-bar i {
+      color: #94a3b8;
+      align-self: center;
+      font-size: 1.1rem;
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 12px 14px;
+      font-size: 1rem;
+      background: transparent;
+      color: #0f172a;
+    }
+
+    .search-bar input::placeholder {
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    .search-bar button {
+      background: #2f6bff;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      padding: 0 24px;
+      font-size: 0.95rem;
+      cursor: default;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .search-bar button:hover {
+      background: #1e4fd9;
+    }
+
+    .stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 16px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #0b1b2b;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* hero illustration / card */
+    .hero-visual {
+      background: linear-gradient(145deg, #eef3ff, #ffffff);
+      border-radius: 36px;
+      padding: 24px;
+      box-shadow: 0 20px 35px -8px rgba(47, 107, 255, 0.12);
+      border: 1px solid #dfe8f5;
+    }
+
+    .job-card-mini {
+      background: white;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.02);
+      margin-bottom: 18px;
+      border: 1px solid #ecf1f9;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .job-card-mini:last-child {
+      margin-bottom: 0;
+    }
+
+    .company-icon {
+      width: 52px;
+      height: 52px;
+      background: #eef2ff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: #2f6bff;
+      flex-shrink: 0;
+    }
+
+    .job-info {
+      flex: 1;
+    }
+
+    .job-info h4 {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .job-info .meta {
+      display: flex;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .job-info .meta i {
+      margin-right: 4px;
+      color: #94a3b8;
+      font-size: 0.7rem;
+    }
+
+    .salary-tag {
+      background: #e6f7ee;
+      color: #0e7b4b;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+
+    /* job categories / section */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 56px 0 24px;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #0b1b2b;
+    }
+
+    .section-header a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #2f6bff;
+      font-size: 0.95rem;
+    }
+
+    .categories-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .category-chip {
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #1e293b;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      cursor: default;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .category-chip i {
+      color: #2f6bff;
+      font-size: 0.9rem;
+    }
+
+    .category-chip:hover {
+      background: #f0f5ff;
+      border-color: #b9ccff;
+    }
+
+    /* featured jobs */
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-bottom: 56px;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      border: 1px solid #eef2f6;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .job-card:hover {
+      border-color: #cbdff5;
+      box-shadow: 0 16px 28px -8px rgba(47, 107, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .job-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .job-icon {
+      width: 48px;
+      height: 48px;
+      background: #f0f5ff;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2f6bff;
+      font-size: 1.4rem;
+    }
+
+    .bookmark-icon {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      cursor: default;
+    }
+
+    .job-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      color: #0b1b2b;
+    }
+
+    .job-company {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: #475569;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .job-company i {
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    .job-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 40px;
+      letter-spacing: 0.01em;
+    }
+
+    .job-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      border-top: 1px solid #f0f4fa;
+      padding-top: 16px;
+    }
+
+    .salary {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #0b1b2b;
+    }
+
+    .salary span {
+      font-weight: 500;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    .job-type {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #2f6bff;
+      background: #eef3ff;
+      padding: 6px 14px;
+      border-radius: 30px;
+    }
+
+    /* CTA banner */
+    .cta-banner {
+      background: #0b1b2b;
+      border-radius: 32px;
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 40px 0 64px;
+      color: white;
+      background-image: radial-gradient(circle at 80% 30%, rgba(47, 107, 255, 0.3) 0%, transparent 45%);
+    }
+
+    .cta-text h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      max-width: 500px;
+      line-height: 1.3;
+    }
+
+    .cta-text p {
+      color: #b0c4de;
+      font-size: 1.05rem;
+      max-width: 500px;
+    }
+
+    .cta-btn {
+      background: white;
+      color: #0b1b2b;
+      font-weight: 700;
+      border: none;
+      padding: 16px 36px;
+      border-radius: 60px;
+      font-size: 1rem;
+      cursor: default;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .cta-btn:hover {
+      background: #eef3ff;
+    }
+
+    /* footer */
+    .footer {
+      border-top: 1px solid #e2e8f0;
+      padding: 40px 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .footer-links a:hover {
+      color: #2f6bff;
+    }
+
+    /* responsive */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      .jobs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cta-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-content h1 {
+        font-size: 2.3rem;
+      }
+      .jobs-grid {
+        grid-template-columns: 1fr;
+      }
+      .section-header h2 {
+        font-size: 1.6rem;
+      }
+      .cta-banner {
+        padding: 32px;
+      }
+      .cta-text h2 {
+        font-size: 1.6rem;
+      }
+      .footer {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+      .hero {
+        padding-top: 32px;
+      }
+      .stats {
+        gap: 24px;
+      }
+      .search-bar {
+        flex-wrap: wrap;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        gap: 12px;
+      }
+      .search-bar input {
+        background: white;
+        border-radius: 40px;
+        padding: 14px 20px;
+        border: 1px solid #e2e8f0;
+      }
+      .search-bar button {
+        padding: 14px 24px;
+        width: 100%;
+      }
+      .hero-visual {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- navigation -->
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fa-solid fa-globe"></i>
+        <span>RemoteHub</span>
+      </div>
+      <div class="nav-links">
+        <a href="#">Find Jobs</a>
+        <a href="#">Companies</a>
+        <a href="#">Salaries</a>
+        <a href="#">Career Advice</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn-outline">Sign In</button>
+        <button class="btn-primary">Post a Job</button>
+      </div>
+    </nav>
+
+    <!-- hero section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Find your next <span class="hero-highlight">remote</span> opportunity</h1>
+        <p>Discover 12,000+ online jobs from top companies. Work from anywhere, on your own terms.</p>
+
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Job title, keyword, or company" value="Product Designer">
+          <button>Search</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number">12.4k</span>
+            <span class="stat-label">Remote jobs</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">3.2k</span>
+            <span class="stat-label">Hiring companies</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">98%</span>
+            <span class="stat-label">Satisfaction</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="job-card-mini">
+          <div class="company-icon">
+            <i class="fa-brands fa-figma"></i>
+          </div>
+          <div class="job-info">
+            <h4>Senior Product Designer</h4>
+            <div class="meta">
+              <span><i class="fa-regular fa-building"></i> Figma</span>
+              <span><i class="fa-regular fa-clock"></i> Full-time</span>
+            </div>
+          </div>
+          <div class="salary-tag">$140k–$180k</div>
+        </div>
+
+        <div class="job-card-mini">
+          <div class="company-icon">
+            <i class="fa-brands fa-github"></i>
+          </div>
+          <div class="job-info">
+            <h4>Frontend Engineer</h4>
+            <div class="meta">
+              <span><i class="fa-regular fa-building"></i> GitHub</span>
+              <span><i class="fa-regular fa-clock"></i> Remote</span>
+            </div>
+          </div>
+          <div class="salary-tag">$130k–$170k</div>
+        </div>
+
+        <div class="job-card-mini">
+          <div class="company-icon">
+            <i class="fa-brands fa-slack"></i>
+          </div>
+          <div class="job-info">
+            <h4>Customer Success Lead</h4>
+            <div class="meta">
+              <span><i class="fa-regular fa-building"></i> Slack</span>
+              <span><i class="fa-regular fa-clock"></i> Full-time</span>
+            </div>
+          </div>
+          <div class="salary-tag">$95k–$120k</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- categories -->
+    <div class="section-header">
+      <h2>Browse by category</h2>
+      <a href="#">View all categories →</a>
+    </div>
+    <div class="categories-grid">
+      <div class="category-chip"><i class="fa-solid fa-code"></i> Engineering</div>
+      <div class="category-chip"><i class="fa-solid fa-paint-brush"></i> Design</div>
+      <div class="category-chip"><i class="fa-solid fa-chart-line"></i> Marketing</div>
+      <div class="category-chip"><i class="fa-solid fa-headset"></i> Customer Support</div>
+      <div class="category-chip"><i class="fa-solid fa-database"></i> Data Science</div>
+      <div class="category-chip"><i class="fa-solid fa-pen-nib"></i> Writing</div>
+      <div class="category-chip"><i class="fa-solid fa-calculator"></i> Finance</div>
+      <div class="category-chip"><i class="fa-solid fa-users"></i> HR & Recruiting</div>
+    </div>
+
+    <!-- featured jobs -->
+    <div class="section-header">
+      <h2>Featured remote jobs</h2>
+      <a href="#">See all jobs →</a>
+    </div>
+    <div class="jobs-grid">
+      <!-- job 1 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="job-icon"><i class="fa-brands fa-figma"></i></div>
+          <i class="fa-regular fa-bookmark bookmark-icon"></i>
+        </div>
+        <h3>Senior Product Designer</h3>
+        <div class="job-company">
+          <i class="fa-regular fa-building"></i> Figma · Remote
+        </div>
+        <div class="job-tags">
+          <span class="tag">Full-time</span>
+          <span class="tag">Design</span>
+          <span class="tag">Senior</span>
+        </div>
+        <div class="job-footer">
+          <div class="salary">$140k <span>– $180k</span></div>
+          <div class="job-type">Remote</div>
+        </div>
+      </div>
+
+      <!-- job 2 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="job-icon"><i class="fa-brands fa-github"></i></div>
+          <i class="fa-regular fa-bookmark bookmark-icon"></i>
+        </div>
+        <h3>Frontend Engineer</h3>
+        <div class="job-company">
+          <i class="fa-regular fa-building"></i> GitHub · Remote
+        </div>
+        <div class="job-tags">
+          <span class="tag">Full-time</span>
+          <span class="tag">Engineering</span>
+          <span class="tag">React</span>
+        </div>
+        <div class="job-footer">
+          <div class="salary">$130k <span>– $170k</span></div>
+          <div class="job-type">Remote</div>
+        </div>
+      </div>
+
+      <!-- job 3 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="job-icon"><i class="fa-brands fa-slack"></i></div>
+          <i class="fa-regular fa-bookmark bookmark-icon"></i>
+        </div>
+        <h3>Customer Success Lead</h3>
+        <div class="job-company">
+          <i class="fa-regular fa-building"></i> Slack · Remote
+        </div>
+        <div class="job-tags">
+          <span class="tag">Full-time</span>
+          <span class="tag">Support</span>
+          <span class="tag">Lead</span>
+        </div>
+        <div class="job-footer">
+          <div class="salary">$95k <span>– $120k</span></div>
+          <div class="job-type">Remote</div>
+        </div>
+      </div>
+
+      <!-- job 4 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="job-icon"><i class="fa-brands fa-spotify"></i></div>
+          <i class="fa-regular fa-bookmark bookmark-icon"></i>
+        </div>
+        <h3>Data Scientist</h3>
+        <div class="job-company">
+          <i class="fa-regular fa-building"></i> Spotify · Remote
+        </div>
+        <div class="job-tags">
+          <span class="tag">Full-time</span>
+          <span class="tag">Data</span>
+          <span class="tag">Python</span>
+        </div>
+        <div class="job-footer">
+          <div class="salary">$150k <span>– $190k</span></div>
+          <div class="job-type">Remote</div>
+        </div>
+      </div>
+
+      <!-- job 5 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="job-icon"><i class="fa-brands fa-dropbox"></i></div>
+          <i class="fa-regular fa-bookmark bookmark-icon"></i>
+        </div>
+        <h3>Product Marketing Manager</h3>
+        <div class="job-company">
+          <i class="fa-regular fa-building"></i> Dropbox · Remote
+        </div>
+        <div class="job-tags">
+          <span class="tag">Full-time</span>
+          <span class="tag">Marketing</span>
+          <span class="tag">B2B</span>
+        </div>
+        <div class="job-footer">
